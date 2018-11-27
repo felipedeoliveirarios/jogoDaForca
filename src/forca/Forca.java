@@ -3,15 +3,14 @@ package forca;
 import java.net.Socket;
 /**
  *
- * @author aluno
+ * @author Felipe Rios
  */
 public class Forca {
 
-    /**
-     * @param args the command line arguments
-     */
+    
     public static void main(String[] args) {
-        // TODO code application logic here
+        // CRIA E INICIA UMA THREAD DE CLIENTE
+        // CASO O USUÁRIO DESEJE, CRIA E INICIA UMA THREAD DE SERVIDOR.
     }
     
 }
