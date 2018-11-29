@@ -23,13 +23,18 @@ public class Clientside extends Thread{
     private byte[] inBuffer; //BUFFER DE ENTRADA
     private byte[] outBuffer; //BUFFER DE SAÍDA
     private String nickname; //APELIDO DO CLIENTE
+    private Mediator mediator;
     
-    public void Clientside(String nickname) throws Exception{
+    public Clientside(Mediator mediator) throws Exception{
+        this.mediator = mediator;
         this.clientSocket = new DatagramSocket(port);
         this.inBuffer = new byte[1024];
         this.outBuffer = new byte[1024];
-        this.nickname = nickname;
         this.broadcastIp = InetAddress.getByName("255.255.255.255");
+    }
+    
+    public void setMediator(Mediator mediator){
+        
     }
     
     @Override
@@ -48,6 +53,11 @@ public class Clientside extends Thread{
         byte[] outbuffer = broadcastMessage.getBytes(); 
         DatagramPacket packet = new DatagramPacket(outbuffer, outbuffer.length, address, 4445);
         clientSocket.send(packet);
+    }
+
+    void close() {
+        clientSocket.close();
+        interrupt();
     }
     
     

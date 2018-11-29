@@ -22,8 +22,10 @@ public class Serverside extends Thread{
     private boolean playing; //SE HÁ UM JOGO EM ANDAMENTO
     private byte[] inBuffer; //BUFFER DE ENTRADA
     private byte[] outBuffer; //BUFFER DE SAÍDA
+    private Mediator mediator;
     
-    public Serverside() throws IOException{
+    public Serverside(Mediator mediator) throws IOException{
+        this.mediator = mediator;
         this.serverSocket = new DatagramSocket(port);
         this.clientCount = 0;
         this.playing = false;
@@ -55,5 +57,10 @@ public class Serverside extends Thread{
         byte[] outbuffer = broadcastMessage.getBytes(); 
         DatagramPacket packet = new DatagramPacket(outbuffer, outbuffer.length, address, 4445);
         serverSocket.send(packet);
+    }
+
+    void close() {
+        serverSocket.close();
+        interrupt();
     }
 }

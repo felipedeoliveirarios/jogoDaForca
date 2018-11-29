@@ -1,4 +1,5 @@
 package forca;
+
 /**
  * Jogo da forca implementado usando arquitetura peer to peer.
  * Cada instância executada cria uma thread de cliente e a inicia.
@@ -8,11 +9,13 @@ package forca;
  */
 public class Forca {
     
-    public static void main(String[] args) {
-        System.out.println("Seja bem-vindo ao jogo da forca!");
-        GUI gui = new GUI();
+    public static void main(String[] args) throws Exception {
+        Mediator mediator = new Mediator();
+        GUI gui = new GUI(mediator);
+        Clientside client = new Clientside(mediator);
+        Serverside server = new Serverside(mediator);
+        ConnectionGUI cGui = new ConnectionGUI(mediator);
         // CRIA E INICIA UMA THREAD DE CLIENTE
-        //Clientside cliente = new Clientside();
         //cliente.start();
         // CASO O USUÁRIO DESEJE, CRIA E INICIA UMA THREAD DE SERVIDOR.
     }
